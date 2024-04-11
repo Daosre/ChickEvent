@@ -79,7 +79,7 @@ const LogIn = async (req,res) => {
             process.env.MA_SECRETKEY,
             { expiresIn: '10d'}
         )
-        res.status(200).json({ jwt: toktok})
+        res.status(200).json({ jwt: toktok })
     }
 }
 module.exports = {
