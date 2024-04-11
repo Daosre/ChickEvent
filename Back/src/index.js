@@ -5,6 +5,7 @@ const SignUproad = require('./Controller/Routes/user')
 
 
 app.use(express.json())
+//Route pour acceder au SignUp
 app.use('/SignUp', SignUproad)
 
 

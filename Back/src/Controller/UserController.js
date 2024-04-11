@@ -23,7 +23,7 @@ const SignUp = async (req,res) => {
             req.body.password,
             new Date(),
             new Date(),
-            true
+            'user'
         )
         //Envoie la réponse au serveur en y mettant dans le dossier ChickEvent puis met l'User dans la collection ChickenUser.
         let resultat = await client
