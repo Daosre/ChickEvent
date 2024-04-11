@@ -2,7 +2,7 @@ const { User } = require('../Model/User')
 const client = require('../Services/Connexion')
 
 
-const Enregistrement = async (req,res) => {
+const SignUp = async (req,res) => {
     //Si lors de l'enregistrement tout est bien respecter
     if( 
         !req.body.firstName ||
@@ -37,4 +37,8 @@ const Enregistrement = async (req,res) => {
         console.log(e)
         res.status(500).json(e)
     }
+}
+
+module.exports = {
+    SignUp
 }
