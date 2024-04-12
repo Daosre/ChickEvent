@@ -8,7 +8,7 @@ require('dotenv').config()
 
 app.use(express.json())
 //Route pour acceder au SignUp
-app.use('/SignUp', SignUproad)
+app.use('/user', SignUproad)
 
 //Connection avec la base de données.
 connect('mongodb://127.0.0.1:27017', (error) => {
