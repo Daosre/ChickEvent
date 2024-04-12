@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const { connect } = require('./Services/Connexion');
 const SignUproad = require('./Controller/Routes/user');
-const { CreateEvent } = require('./Controller/EventController');
+const { CreateEvent, getMyEvent } = require('./Controller/EventController');
 require('dotenv').config()
 
 

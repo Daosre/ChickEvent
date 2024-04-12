@@ -43,5 +43,26 @@ const CreateEvent = async (req,res) => {
     }
 }
 
+const getMyEvent = async (req, res) => {
+    const token = await extracToken(req)
+    jwt.verify(
+        token,
+        process.env.MA_SECRETKEY,
+        async (err, authData) => {
+            if (err) {
+                console.log(err)
+                res.status(401).json({ err: 'Unautorizhed' })
+                return
+            } else {
+                let Events = await client
+                .db('ChickenEvent')
+                .collection('EventChicken')
+                .find({ userId: authData.id })
+            let apiResponse = await Events.toArray()
+            res.status(200).json(apiResponse)
+            }
+        }
+    ) 
+}
 
-module.exports = { CreateEvent }
+module.exports = { CreateEvent, getMyEvent }
