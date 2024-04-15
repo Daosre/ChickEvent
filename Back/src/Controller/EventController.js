@@ -90,8 +90,7 @@ const updateEvent = async (req,res) => {
                         title: req.body.title,
                         description: req.body.description,
                         image: req.body.image,
-                        category: req.body.category,
-                        status: req.body.status,
+                        category: req.body.category
                     }, 
                 } 
             )
