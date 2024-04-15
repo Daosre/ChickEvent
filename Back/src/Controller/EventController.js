@@ -80,7 +80,7 @@ const updateEvent = async (req,res) => {
         return
     }
     try {
-       let bla = await client
+        await client
             .db('ChickEvent')
             .collection('EventChicken')
             .updateOne(
