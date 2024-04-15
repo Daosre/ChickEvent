@@ -76,24 +76,23 @@ const updateEvent = async (req,res) => {
 }
 //Suppréssion d'un Event
 const DeleteEvent = async (req, res) => {
-    if(!req.body.userId || !req.params.EventId) {
+    if(!req.body.userId || !req.body.EventId) {
         res.status(400).json({ error: 'Ta pas le droit de faire ça.'})
-        console.log(req.params.EventId)
+        console.log(req.body.EventId)
         return
     }
-    let EventId = new ObjectId(req.params.EventId)
+    let EventId = new ObjectId(req.body.EventId)
     let userId = new ObjectId(req.body.userId)
 
     let user = await client
     .db('ChickEvent')
     .collection('ChickenUser')
-    .findOne({ _id: userId })
+    .find({ _id: userId })
 
     let Event = await client
     .db('ChickEvent')
     .collection('EventChicken')
-    .findOne({ _id: EventId })
-    console.log(Event)
+    .find({ _id: EventId })
     
     //Si le userId ne conrespond pas avec l'EventId alors tu me met une erreur.
     if(!user || !Event) {
