@@ -8,7 +8,6 @@ const router = express.Router()
 
 router.route('/mine').post(extractToken)
 router.route('/CreateEvent').post(CreateEvent)
-router.route('/MyEvent').get(getMyEvent)
 
 
 module.exports = router

@@ -43,26 +43,37 @@ const CreateEvent = async (req,res) => {
     }
 }
 
-const getMyEvent = async (req, res) => {
-    const token = await extracToken(req)
-    jwt.verify(
-        token,
-        process.env.MA_SECRETKEY,
-        async (err, authData) => {
-            if (err) {
-                console.log(err)
-                res.status(401).json({ err: 'Unautorizhed' })
-                return
-            } else {
-                let Events = await client
-                .db('ChickenEvent')
-                .collection('EventChicken')
-                .find({ userId: authData.id })
-            let apiResponse = await Events.toArray()
-            res.status(200).json(apiResponse)
-            }
-        }
-    ) 
+const DeleteEvent = async (req, res) => {
+    if(!req.body.userId || !req.body.EventId) {
+        res.status(400).json({ error: 'Ta pas le droit de faire ça.'})
+        return
+    }
+    let EventId = new ObjectId(req.body.EventId)
+    let userId = new ObjectId(req.body.userId)
+
+    let user = await client
+    .db('ChickEvent')
+    .collection('ChickenUser')
+    .find({ _id: EventId })
+    
+    //Si le userId ne conrespond pas avec l'EventId alors tu me met une erreur.
+    if(!user || !Event) {
+        res.status(401).json({ error: "T'es pas autoriser va voir ailleurs"})
+        return
+    }
+    if(Event.userId !== user._id || user.role !== 'admin') {
+        res.status(401).json({ error: "T'es pas autoriser va voir ailleurs"})
+        return
+    }
+
+    try {
+        await client
+        .db('ChickEvent')
+        .collection('EventChicken')
+        .deleteOne({ _id: EventId})
+    } catch (e) {
+        res.status(500).json(e)
+    }
 }
 
-module.exports = { CreateEvent, getMyEvent }
+module.exports = { CreateEvent, DeleteEvent }
