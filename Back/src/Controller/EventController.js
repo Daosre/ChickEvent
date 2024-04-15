@@ -48,31 +48,56 @@ const getAllEvent = async (req, res) => {
     let apiReponse = await ToutEvents.toArray()
     res.status(200).json(apiReponse)
 }
-
+//Update d'un Event
 const updateEvent = async (req,res) => {
     //Validateur pour l'update
     if(
-        !request.body.title ||
-        !request.body.description ||
-        !request.body.price ||
-        !request.body.image ||
-        !request.body.userId
+        !req.body.title ||
+        !req.body.description ||
+        !req.body.image ||
+        !req.body.category ||
+        !req.body.userId
     ) {
         res.status(400).json({ error: 'Manque des trucs.'})
     }
     let user = await client
     .db('ChickEvent')
-    .collection('EventChicken')
+    .collection('ChickenUser')
     .find({ _id: req.body.userId })
 
-    if(!user || !Event) {
+    let Events = await client
+    .db('ChickEvent')
+    .collection('EventChicken')
+    .find({ _id : req.body.EventId})
+
+    if(!user || !Events) {
         res.status(401).json({ error: 'Non autorisé'})
         return
     }
-    if (Event.userId !== user._id || user.role !== 'admin') {
-        res.status(401).json({ error: 'TA MERE'})
+    if (Events.userId !== user._id && user.role !== 'admin') {
+        res.status(401).json({ error: 'Non'})
         return
     }
+    try {
+        await client
+            .db('ChickEvent')
+            .collection('EventChicken')
+            .updateOne(
+                { _id: Events._id },
+                {
+                    $set: {
+                        title: req.body.title,
+                        description: req.body.description,
+                        image: req.body.image,
+                        category: req.body.category,
+                        status: req.body.status,
+                    },
+                } 
+            )
+    } catch (e) {
+        res.status(500).json(e)
+    } 
+    res.status(200).json({msg: "Updated"})    
 }
 //Suppréssion d'un Event
 const DeleteEvent = async (req, res) => {
@@ -116,4 +141,4 @@ const DeleteEvent = async (req, res) => {
 }
 
 
-module.exports = { CreateEvent, getAllEvent, DeleteEvent }
+module.exports = { CreateEvent, getAllEvent, DeleteEvent, updateEvent }
