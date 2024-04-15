@@ -5,8 +5,10 @@ const { verify } = require('jsonwebtoken')
 const router = express.Router()
 
 
+
 router.route('/mine').post(extractToken)
 router.route('/CreateEvent').post(CreateEvent)
-router.route('/MyEvent', extractToken).get(getMyEvent)
+router.route('/MyEvent').get(getMyEvent)
+
 
 module.exports = router
