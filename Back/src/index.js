@@ -11,7 +11,10 @@ app.use(express.json())
 //Route pour les Users
 app.use('/user', SignUproad)
 //Route pour les Event.
-app.use('/AddEvent', EventRoad)
+app.use('/Event', EventRoad)
+
+
+
 //Connection avec la base de données.
 connect('mongodb://127.0.0.1:27017', (error) => {
     if (error) {

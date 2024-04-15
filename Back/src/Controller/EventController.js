@@ -42,38 +42,51 @@ const CreateEvent = async (req,res) => {
         res.status(500).json({ error: "t'es ici"})
     }
 }
-
-const DeleteEvent = async (req, res) => {
-    if(!req.body.userId || !req.body.EventId) {
-        res.status(400).json({ error: 'Ta pas le droit de faire ça.'})
-        return
-    }
-    let EventId = new ObjectId(req.body.EventId)
-    let userId = new ObjectId(req.body.userId)
-
-    let user = await client
-    .db('ChickEvent')
-    .collection('ChickenUser')
-    .find({ _id: userId })
-    
-    //Si le userId ne conrespond pas avec l'EventId alors tu me met une erreur.
-    if(!user || !Event) {
-        res.status(401).json({ error: "T'es pas autoriser va voir la-bas"})
-        return
-    }
-    if(Event.userId !== user._id || user.role !== 'admin') {
-        res.status(401).json({ error: "T'es pas autoriser va voir ailleurs"})
-        return
-    }
-
-    try {
-        await client
-        .db('ChickEvent')
-        .collection('EventChicken')
-        .deleteOne({ _id: EventId})
-    } catch (e) {
-        res.status(500).json(e)
-    }
+//Récupération de tout les Events crée.
+const getAllEvent = async (req, res) => {
+    let ToutEvents = await client.db('ChickEvent').collection('EventChicken').find()
+    let apiReponse = await ToutEvents.toArray()
+    res.status(200).json(apiReponse)
 }
+//Suppréssion d'un Event
+// const DeleteEvent = async (req, res) => {
+//     if(!req.body.userId || !req.body.EventId) {
+//         res.status(400).json({ error: 'Ta pas le droit de faire ça.'})
+//         console.log(req.body.EventId)
+//         return
+//     }
+//     let EventId = new ObjectId(req.body.EventId)
+//     let userId = new ObjectId(req.body.userId)
 
-module.exports = { CreateEvent, DeleteEvent }
+//     let user = await client
+//     .db('ChickEvent')
+//     .collection('ChickenUser')
+//     .find({ _id: userId })
+
+//     let Event = await client
+//     .db('ChickEvent')
+//     .collection('ChickenEvent')
+//     .find({ _id: EventId })
+    
+//     //Si le userId ne conrespond pas avec l'EventId alors tu me met une erreur.
+//     if(!user || !Event) {
+//         res.status(401).json({ error: "T'es pas autoriser va voir la-bas"})
+//         return
+//     }
+//     if(Event.userId !== user._id || user.role !== 'admin') {
+//         res.status(401).json({ error: "T'es pas autoriser va voir ailleurs"})
+//         return
+//     }
+
+//     try {
+//         await client
+//         .db('ChickEvent')
+//         .collection('EventChicken')
+//         .deleteOne({ _id: EventId})
+//     } catch (e) {
+//         res.status(500).json(e)
+//     }
+// }
+
+
+module.exports = { CreateEvent, getAllEvent }
