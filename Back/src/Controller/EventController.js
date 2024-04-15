@@ -59,17 +59,18 @@ const updateEvent = async (req,res) => {
         !req.body.userId
     ) {
         res.status(400).json({ error: 'Manque des trucs.'})
-    }
+    }   
+    let EventId = new ObjectId(req.body.EventId)
+    let userId = new ObjectId(req.body.userId)
     let user = await client
     .db('ChickEvent')
     .collection('ChickenUser')
-    .find({ _id: req.body.userId })
+    .find({ _id: userId })
 
     let Events = await client
     .db('ChickEvent')
     .collection('EventChicken')
-    .find({ _id : req.body.EventId})
-
+    .find({ _id : EventId})
     if(!user || !Events) {
         res.status(401).json({ error: 'Non autorisé'})
         return
@@ -79,11 +80,11 @@ const updateEvent = async (req,res) => {
         return
     }
     try {
-        await client
+       let bla = await client
             .db('ChickEvent')
             .collection('EventChicken')
             .updateOne(
-                { _id: Events._id },
+                { _id: EventId },
                 {
                     $set: {
                         title: req.body.title,
@@ -91,7 +92,7 @@ const updateEvent = async (req,res) => {
                         image: req.body.image,
                         category: req.body.category,
                         status: req.body.status,
-                    },
+                    }, 
                 } 
             )
     } catch (e) {
