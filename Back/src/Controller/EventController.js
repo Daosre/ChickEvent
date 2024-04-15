@@ -54,11 +54,11 @@ const DeleteEvent = async (req, res) => {
     let user = await client
     .db('ChickEvent')
     .collection('ChickenUser')
-    .find({ _id: EventId })
+    .find({ _id: userId })
     
     //Si le userId ne conrespond pas avec l'EventId alors tu me met une erreur.
     if(!user || !Event) {
-        res.status(401).json({ error: "T'es pas autoriser va voir ailleurs"})
+        res.status(401).json({ error: "T'es pas autoriser va voir la-bas"})
         return
     }
     if(Event.userId !== user._id || user.role !== 'admin') {

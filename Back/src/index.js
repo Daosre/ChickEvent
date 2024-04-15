@@ -2,17 +2,16 @@ const express = require('express');
 const app = express();
 const { connect } = require('./Services/Connexion');
 const SignUproad = require('./Controller/Routes/user');
-const { CreateEvent, getMyEvent } = require('./Controller/EventController');
+const EventRoad = require('./Controller/Routes/event')
 require('dotenv').config()
 
 
 
 app.use(express.json())
-//Route pour acceder au SignUp
+//Route pour les Users
 app.use('/user', SignUproad)
-//Création d'event.
-app.use('/AddEvent', CreateEvent)
-
+//Route pour les Event.
+app.use('/AddEvent', EventRoad)
 //Connection avec la base de données.
 connect('mongodb://127.0.0.1:27017', (error) => {
     if (error) {
