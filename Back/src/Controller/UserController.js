@@ -39,14 +39,13 @@ const SignUp = async (req,res) => {
     } 
     //Si la réonse est pas bonne renvoie ca
     catch (e) {
-        console.log(e)
         res.status(500).json(e)
     }
 }
 
 const LogIn = async (req,res) => {
     //Vérification du name et du mot de passe
-    if (!req.body.firstName || !req.body.password) {
+    if (!req.body.email || !req.body.password) {
         res.status(400).json({ error: 'Nom ou mot de passe incorrect'})
         return
     }
@@ -55,7 +54,7 @@ const LogIn = async (req,res) => {
     .db('ChickEvent')
     .collection('ChickenUser')
     //On recherche dans la BDD si ce que le client a mis correspond avec notre données.
-    .findOne({ firstName: req.body.firstName })
+    .findOne({ email: req.body.email })
 
     if(!user) {
         res.status(401).json({ error: 'Aucun compte a ce nom'})

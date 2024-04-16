@@ -3,11 +3,13 @@ const app = express();
 const { connect } = require('./Services/Connexion');
 const SignUproad = require('./Controller/Routes/user');
 const EventRoad = require('./Controller/Routes/event')
+const cors = require('cors')
 require('dotenv').config()
 
 
 
 app.use(express.json())
+app.use(cors())
 //Route pour les Users
 app.use('/user', SignUproad)
 //Route pour les Event.
