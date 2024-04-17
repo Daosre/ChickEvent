@@ -1,6 +1,7 @@
 const { Event }= require('../Model/Event')
 const client = require('../Services/Connexion')
 const { ObjectId } = require('bson')
+const { extractToken } = require('../Utils/extractToken')
 //On r'apelle le Token / Jwt
 const { extracToken } = require('../Utils/extractToken')
 const jwt = require('jsonwebtoken')
@@ -138,6 +139,26 @@ const DeleteEvent = async (req, res) => {
         res.status(500).json(e)
     }
 }
+const MyEvent = async (req, res) => {
+    const token = await extractToken(req)
 
+    jwt.verify(
+        token,
+        process.env.MA_SECRETKEY,
+        async (err, authData) => {
+            if (err) {
+                res.status(401).json({ err: 'Unauthorized' })
+                return
+            } else {
+                let Event = await client
+                    .db('ChickEvent')
+                    .collection('EventChicken')
+                    .find({ userId: authData.id })
+                let apiResponse = await Event.toArray()
+                res.status(200).json(apiResponse)
+            }
+        }
+    )
+}
 
-module.exports = { CreateEvent, getAllEvent, DeleteEvent, updateEvent }
+module.exports = { CreateEvent, getAllEvent, DeleteEvent, updateEvent, MyEvent }
