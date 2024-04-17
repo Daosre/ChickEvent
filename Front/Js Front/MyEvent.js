@@ -29,9 +29,35 @@ async function MyEvent () {
         <p class='Description'>${Event.description}</p>
         <img src='${Event.image} class='EventImage'/>
         <p class='category'>${Event.category}</p>
-        <button>TEST</button>
-        <i class="fa-thin fa-trash"></i>
-        <i class="fa-thin fa-pen"></i>`
+        <button class="delbtn">Update</button>
+        <button class="Updbtn">Delete</button>
+        <span class="succes"></span>`
     });
 }
+async function DeleteEvent() {
+    let jwt = window.localStorage.getItem('jwt')
+
+    let request = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+            Authorization: `Bearer ${jwt}`,
+        },
+        
+    }
+    let apiRequest = await fetch('http://localhost:3107/Event/DeleteEvent', request)
+    let response = await apiRequest.json()
+    let sucess = document.querySelector('.succes')
+    let del = document.querySelector('.delbtn')
+    
+        del.addEventListener('click', () => {
+           
+        if(response.status === 200) {
+            DeleteEvent()
+            sucess.innerHTML = 'Deleted'
+            location.reload()
+        } 
+    })
+}
+
 MyEvent()
