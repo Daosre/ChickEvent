@@ -1,6 +1,7 @@
 const { User } = require('../Model/User')
 const client = require('../Services/Connexion')
 const bcrypt = require('bcrypt')
+const { ObjectId } = require('bson')
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
@@ -35,7 +36,8 @@ const SignUp = async (req,res) => {
         .db('ChickEvent')
         .collection('ChickenUser')
         .insertOne(user)
-        res.status(200).json(resultat)
+        const id = user._id;
+        res.status(200).json({resultat: resultat, id: id})
     } 
     //Si la réonse est pas bonne renvoie ca
     catch (e) {

@@ -19,7 +19,8 @@ async function handleLogin() {
     let apiRequest = await fetch("http://127.0.0.1:3107/user/LogIn", request)
     let response = await apiRequest
     if (response.status === 200) {
-      user = await response.json()
+     const data = await response.json()
+     localStorage.setItem('jwt',data.jwt)
     } else {
       error.innerHTML = "Something is Wrong"
     }

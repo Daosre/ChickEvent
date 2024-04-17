@@ -4,6 +4,14 @@ AddEvent.addEventListener('click', () => {
     window.location.href = '../AddPost/AddPost.html'
 })
 
+let LogOut = document.querySelector('.LogOut')
+LogOut.addEventListener('click', () => {
+    localStorage.clear()
+    setTimeout(() => {
+        window.location.href ='../Accueil/Accueil.html'
+    }, 1000);
+})
+
 async function getAllEvent() {
     let response = await fetch('http://127.0.0.1:3107/Event/AllEvent')
     let client = await response.json()
