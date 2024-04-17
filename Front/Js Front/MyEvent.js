@@ -1,5 +1,15 @@
 let main = document.querySelector('.main-container')
-
+let LogOut = document.querySelector('.LogOut')
+LogOut.addEventListener('click', () => {
+    localStorage.clear()
+    setTimeout(() => {
+        window.location.href ='../Accueil/Accueil.html'
+    }, 1000);
+})
+let AllPost = document.querySelector('.Allpost')
+AllPost.addEventListener('click', () => {
+    window.location.href = '../AllPost/AllEvent.html'
+})
 async function MyEvent () {
     let jwt = window.localStorage.getItem('jwt')
 
