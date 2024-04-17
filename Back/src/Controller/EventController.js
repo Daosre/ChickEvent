@@ -14,9 +14,8 @@ const CreateEvent = async (req,res) => {
         !req.body.title ||
         !req.body.description ||
         !req.body.image ||
-        !req.body.category ||
-        !req.body.userId 
-    ) 
+        !req.body.category
+        ) 
     //Si toute les conditions ci-dessus ne sont pas respecter:
     {
         res.status(400).json({ error: "Veuillez précisez les champs vides"})

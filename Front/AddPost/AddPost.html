@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,14 +17,19 @@
     </header>
     <main class="main-container">
         <label for="Title">Title</label>
-        <input type="text">
+        <input type="text" class="title">
+        <span class="error"></span>
             <label for="Description">Description</label>
-            <input type="text">
+            <input type="text" class="description">
+            <span class="error"></span>
         <label for="image">Image</label>
-        <input type="url" placeholder="URL Only">
+        <input type="url" placeholder="URL Only" class="image">
+        <span class="error"></span>
             <label for="Category">Category</label>
-            <input type="text">
+            <input type="text" class="category">
+            <span class="error"></span>
         <button class="AddEvent">Add Event</button>
+        <span class="succes"></span>
     </main>
     <footer class="footer-container">
         <ul>
