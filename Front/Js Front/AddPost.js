@@ -12,7 +12,7 @@ async function CreateEvent() {
         description: description,
         image: image,
         category: category
-    } 
+        } 
     let request = {
         method: "POST",
         headers: {

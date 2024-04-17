@@ -8,7 +8,7 @@ const router = express.Router()
 
 
 router.route('/mine').post(extractToken)
-router.route('/CreateEvent', middleURL).post(CreateEvent)
+router.route('/CreateEvent', middleURL, middleId).post(CreateEvent)
 router.route('/DeleteEvent', middleId).delete(DeleteEvent)
 router.route('/AllEvent').get(getAllEvent)
 router.route('/UpdateEvent', middleId).patch(updateEvent)

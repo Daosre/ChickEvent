@@ -27,4 +27,5 @@ const middleURL = (req, res, next) => {
   req.isURL = link;
   next();
 };
+
 module.exports = { middleId, middleEmail, middleURL };
