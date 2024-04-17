@@ -23,7 +23,8 @@ async function getAllEvent() {
         NewEvent.innerHTML = `<h2 class='Title'>${Event.title}</h2>
         <p class='Description'>${Event.description}</p>
         <img src='${Event.image} class='EventImage'/>
-        <p class='category'>${Event.category}</p>`
+        <p class='category'>${Event.category}</p>
+        <button class="Inscription">Participate</button>`
         emplacement.appendChild(NewEvent)
     }
 }
