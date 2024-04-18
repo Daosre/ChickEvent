@@ -2,8 +2,6 @@ const { Event }= require('../Model/Event')
 const client = require('../Services/Connexion')
 const { ObjectId } = require('bson')
 const { extractToken } = require('../Utils/extractToken')
-//On r'apelle le Token / Jwt
-const { extracToken } = require('../Utils/extractToken')
 const jwt = require('jsonwebtoken')
 //Ne pas oublier le requrie du fichier .env
 require('dotenv').config()
@@ -11,6 +9,15 @@ require('dotenv').config()
 
 //Création des Events
 const CreateEvent = async (req,res) => {
+    const token = await extractToken(req)
+    jwt.verify(
+        token,
+        process.env.MA_SECRETKEY,
+        async (err, authData) => {
+            if (err) {
+                res.status(401).json({ err: 'Unauthorized' })
+                return
+            } else {
     if(
         !req.body.title ||
         !req.body.description ||
@@ -28,7 +35,7 @@ const CreateEvent = async (req,res) => {
             req.body.description,
             req.body.image,
             req.body.category,
-            req.body.userId,
+            authData.id,
             new Date(),
             'published'
         )
@@ -41,6 +48,9 @@ const CreateEvent = async (req,res) => {
     } catch (e) {
         res.status(500).json({ error: "t'es ici"})
     }
+}
+        }
+    )
 }
 //Récupération de tout les Events crée.
 const getAllEvent = async (req, res) => {
@@ -100,45 +110,37 @@ const updateEvent = async (req,res) => {
     res.status(200).json({msg: "Updated"})    
 }
 //Suppréssion d'un Event
-const DeleteEvent = async (req, res) => {
-    if(!req.body.userId || !req.body.EventId) {
-        res.status(400).json({ error: 'Ta pas le droit de faire ça.'})
-        console.log(req.body.EventId)
-        return
-    }
-    let EventId = new ObjectId(req.body.EventId)
-    let userId = new ObjectId(req.body.userId)
+const DeleteEvent = async (req,res) => {
+    const token = await extractToken(req)
+    jwt.verify(
+        token,
+        process.env.MA_SECRETKEY,
+        async (err, authData) => {
+            if (err) {
+                res.status(401).json({ err: 'Unauthorized' })
+                return
+            } else {
+                if(!req.params.id) {
+                    res.status(400).send("Need a ID")
+                }
+                let id = new ObjectId(req.params.id)
 
-    let user = await client
-    .db('ChickEvent')
-    .collection('ChickenUser')
-    .find({ _id: userId })
+                let Eventdel = await client
+                .db('ChickEvent')
+                .collection('EventChicken')
+                .deleteOne({ _id: id })
+                let response = await Eventdel
 
-    let Event = await client
-    .db('ChickEvent')
-    .collection('EventChicken')
-    .find({ _id: EventId })
-    
-    //Si le userId ne conrespond pas avec l'EventId alors tu me met une erreur.
-    if(!user || !Event) {
-        res.status(401).json({ error: "T'es pas autoriser va voir la-bas"})
-        return
-    }
-    if(Event.userId !== user._id && user.role !== "admin") {
-        res.status(401).json({ error: "T'es pas autoriser va voir ailleurs"})
-        return
-    } {
-        res.status(200).json({msg:'supr ok'})
-    }
-    try {
-        await client
-        .db('ChickEvent')
-        .collection('EventChicken')
-        .deleteOne({ _id: EventId})
-    } catch (e) {
-        res.status(500).json(e)
-    }
+                if(response.deletedCount === 1) {
+                    res.status(200).json({ msg: 'Deleted' })
+                } else {
+                    res.status(204).json({ msg: 'Nothing here'})
+                }
+            }
+        }
+    )
 }
+//Affichage des Events de la personne connecter.
 const MyEvent = async (req, res) => {
     const token = await extractToken(req)
 

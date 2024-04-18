@@ -6,6 +6,8 @@ async function CreateEvent() {
     let category = document.querySelector('.category').value
     let error = document.querySelectorAll('.error')
     let sucess = document.querySelector('.succes')
+    let jwt = window.localStorage.getItem('jwt')
+
 
     let EventCreate = {
         title: title,
@@ -17,6 +19,7 @@ async function CreateEvent() {
         method: "POST",
         headers: {
           "Content-type": "application/json; charset=utf-8",
+          Authorization: `Bearer ${jwt}`,
         },
         body: JSON.stringify(EventCreate),
       };

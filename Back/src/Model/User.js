@@ -1,3 +1,4 @@
+//Création de l'objet User.
 class User {
     constructor(firstName, lastName, email, password, gdpr, createAt, role) {
         this.firstName = firstName

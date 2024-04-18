@@ -74,6 +74,7 @@ const LogIn = async (req,res) => {
                 lastName: user.lastName,
                 email: user.email,
                 role: user.role,
+                id: user._id,
                 //On change la date en version française.
                 gdpr: new Date(user.gdpr).toLocaleDateString('fr')
             },

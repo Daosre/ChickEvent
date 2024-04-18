@@ -11,7 +11,7 @@ router.route('/mine', extractToken).get(MyEvent)
 //Route de la création d'event
 router.route('/CreateEvent', middleURL, middleId).post(CreateEvent)
 //Route de la suppréssion d'event
-router.route('/DeleteEvent', middleId).delete(DeleteEvent)
+router.route('/DeleteEvent/:id', middleId).delete(DeleteEvent)
 //Route qui affiche tout les Event crées.
 router.route('/AllEvent').get(getAllEvent)
 //Route pour la modification d'Event.

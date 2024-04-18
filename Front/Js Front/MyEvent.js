@@ -1,9 +1,9 @@
 let main = document.querySelector('.main-container')
 
-let Updatebtn = document.querySelector('.Updbtn')
-Updatebtn.addEventListener('click', () => {
-    window.location.href = '../UpdatePost/Update.html'
-})
+// let Updatebtn = document.querySelector('.Updbtn')
+// Updatebtn.addEventListener('click', () => {
+//     window.location.href = '../UpdatePost/Update.html'
+// })
 
 let LogOut = document.querySelector('.LogOut')
 LogOut.addEventListener('click', () => {
@@ -41,36 +41,26 @@ async function MyEvent () {
         <p class='Description'>${Event.description}</p>
         <img src='${Event.image} class='EventImage'/>
         <p class='category'>${Event.category}</p>
-        <span class="succes"></span>`
-    });
-}
-// async function DeleteEvent() {
-//     let jwt = window.localStorage.getItem('jwt')
+        <button class="delbtn" onclick="DeleteEvent('${Event._id}')">Delete</button>
+        <span class="succes"></span>`   
+             
+})}
 
-//     let request = {
-//         method: 'DELETE',
-//         headers: {
-//             'Content-Type': 'application/json; charset=utf-8',
-//             Authorization: `Bearer ${jwt}`,
-//         },
+async function DeleteEvent(id) {
+    let jwt = window.localStorage.getItem('jwt')
+    if(!jwt) {
+        console.log('Problème')
+    }
+console.log(id)
+    let request = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+            Authorization: `Bearer ${jwt}`,
+        },
         
-//     }
-//     let apiRequest = await fetch('http://localhost:3107/Event/DeleteEvent', request)
-//     let response = await apiRequest.json()
-//     let sucess = document.querySelector('.succes')
-//     let del = document.querySelector('.delbtn')
-    
-//         del.addEventListener('click', () => {
-           
-//         if(response.status === 200) {
-//             DeleteEvent()
-//             sucess.innerHTML = 'Deleted'
-//             location.reload()
-//         } 
-//     })
-// }
-
-
-
-
+    }
+    await fetch(`http://localhost:3107/Event/DeleteEvent/${id}`, request)
+    // window.location.reload()
+    }
 MyEvent()
