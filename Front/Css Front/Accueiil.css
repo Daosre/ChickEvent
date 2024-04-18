@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sedan:ital@0;1&display=swap');
 
 * {
     margin: 0;
@@ -34,14 +35,38 @@ h1 {
     align-items: center;
 }
 .texte-container{
-    border: 1px solid black;
     width: 30%;
     padding: 2%;
     margin: 5%;
+    font-family: "Sedan", serif;
+    font-weight: 400;
+    font-style: normal;
+    box-shadow: 0 1px 20px rgba(0, 0, 0, 0.404);
+    border-radius: 10px;
+}
+a {
+    text-decoration: none;
+}
+.texte-container a:hover {
+    color: orange;
 }
 .footer-container{
-    border: 1px solid yellow;
     position: absolute;
     bottom: 0;
     width: 100%;
 }
+ footer ul {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    padding: 2%;
+ }
+ footer li {
+    cursor: pointer;
+ }
+ footer li:hover {
+    text-decoration: underline;
+ }
+ .troll {
+    color: black;
+ }
