@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    width: 100%;
+    height: 100vh;
+}
+.Logo {
+    width: 10%;
+    border-radius: 50%;
+    border: 1px solid black;
+    margin: 20px;
+}
+.header-container {
+    display: flex;
+    justify-content: center;
+}
+h1 {
+    font-family: "Jersey 10", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.main-container {
+    margin: 5%;
+    text-align: center;
+    padding: 3%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.texte-container{
+    border: 1px solid black;
+    width: 30%;
+    padding: 2%;
+    margin: 5%;
+}
+.footer-container{
+    border: 1px solid yellow;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
