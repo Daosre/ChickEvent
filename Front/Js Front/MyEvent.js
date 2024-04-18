@@ -6,6 +6,11 @@ LogOut.addEventListener('click', () => {
         window.location.href ='../Accueil/Accueil.html'
     }, 1000);
 })
+let AddEvent = document.querySelector('.AddEvent')
+
+AddEvent.addEventListener('click', () => {
+    window.location.href = '../AddPost/AddPost.html'
+})
 let AllPost = document.querySelector('.Allpost')
 AllPost.addEventListener('click', () => {
     window.location.href = '../AllPost/AllEvent.html'
