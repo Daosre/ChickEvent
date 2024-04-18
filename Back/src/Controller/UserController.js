@@ -5,7 +5,7 @@ const { ObjectId } = require('bson')
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
-
+//Inscription sur la BDD.
 const SignUp = async (req,res) => {
     //Si lors de l'enregistrement tout est bien respecter
     if( 
@@ -44,7 +44,7 @@ const SignUp = async (req,res) => {
         res.status(500).json(e)
     }
 }
-
+//Connexion avec la BDD.
 const LogIn = async (req,res) => {
     //Vérification du name et du mot de passe
     if (!req.body.email || !req.body.password) {
@@ -83,6 +83,7 @@ const LogIn = async (req,res) => {
         res.status(200).json({ jwt: toktok })
     }
 }
+//On export bien pour pouvoir y réutiliser.
 module.exports = {
     SignUp, LogIn
 }
