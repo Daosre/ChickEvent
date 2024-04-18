@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Sedan:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Sedan&display=swap');
 
 * {
     margin: 0;
@@ -20,36 +19,52 @@ body {
     display: flex;
     justify-content: center;
 }
-h1 {
-    font-family: "Jersey 10", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-}
 .main-container {
     margin: 5%;
-    text-align: center;
-    padding: 3%;
+    display: flex;
+    justify-content: center;
+}
+h1 {
+    font-family: "Caveat", cursive;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+    position: absolute;
+    top: 30px;
+}
+.formulaire-container {
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    text-align: center;
+    padding: 5%;
+    width: 20%;
+    aspect-ratio: 1;
+    border-radius: 13px;
+    gap: 10px;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.527);
+    position: relative;
 }
-.texte-container{
-    width: 30%;
-    padding: 2%;
-    margin: 5%;
-    font-family: "Sedan", serif;
-    font-weight: 400;
-    font-style: normal;
-    box-shadow: 0 1px 20px rgba(0, 0, 0, 0.404);
+input {
+    text-align: center;
     border-radius: 10px;
+    padding: 4px;
+    border: none;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.527);
 }
-a {
-    text-decoration: none;
-}
-.texte-container a:hover {
-    color: orange;
-}
+
+
+
+
+
+
+
+
+
+
+
+
 .footer-container{
     position: absolute;
     bottom: 0;
@@ -67,7 +82,4 @@ a {
  }
  footer li:hover {
     text-decoration: underline;
- }
- .troll {
-    color: black;
  }
