@@ -61,6 +61,6 @@ console.log(id)
         
     }
     await fetch(`http://localhost:3107/Event/DeleteEvent/${id}`, request)
-    // window.location.reload()
+    window.location.reload()
     }
 MyEvent()
