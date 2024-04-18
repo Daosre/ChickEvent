@@ -1,4 +1,10 @@
 let main = document.querySelector('.main-container')
+
+let Updatebtn = document.querySelector('.Updbtn')
+Updatebtn.addEventListener('click', () => {
+    window.location.href = '../UpdatePost/Update.html'
+})
+
 let LogOut = document.querySelector('.LogOut')
 LogOut.addEventListener('click', () => {
     localStorage.clear()
@@ -6,11 +12,12 @@ LogOut.addEventListener('click', () => {
         window.location.href ='../Accueil/Accueil.html'
     }, 1000);
 })
-let AddEvent = document.querySelector('.AddEvent')
 
+let AddEvent = document.querySelector('.AddEvent')
 AddEvent.addEventListener('click', () => {
     window.location.href = '../AddPost/AddPost.html'
 })
+
 let AllPost = document.querySelector('.Allpost')
 AllPost.addEventListener('click', () => {
     window.location.href = '../AllPost/AllEvent.html'
@@ -34,35 +41,36 @@ async function MyEvent () {
         <p class='Description'>${Event.description}</p>
         <img src='${Event.image} class='EventImage'/>
         <p class='category'>${Event.category}</p>
-        <button class="delbtn">Update</button>
-        <button class="Updbtn">Delete</button>
         <span class="succes"></span>`
     });
 }
-async function DeleteEvent() {
-    let jwt = window.localStorage.getItem('jwt')
+// async function DeleteEvent() {
+//     let jwt = window.localStorage.getItem('jwt')
 
-    let request = {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json; charset=utf-8',
-            Authorization: `Bearer ${jwt}`,
-        },
+//     let request = {
+//         method: 'DELETE',
+//         headers: {
+//             'Content-Type': 'application/json; charset=utf-8',
+//             Authorization: `Bearer ${jwt}`,
+//         },
         
-    }
-    let apiRequest = await fetch('http://localhost:3107/Event/DeleteEvent', request)
-    let response = await apiRequest.json()
-    let sucess = document.querySelector('.succes')
-    let del = document.querySelector('.delbtn')
+//     }
+//     let apiRequest = await fetch('http://localhost:3107/Event/DeleteEvent', request)
+//     let response = await apiRequest.json()
+//     let sucess = document.querySelector('.succes')
+//     let del = document.querySelector('.delbtn')
     
-        del.addEventListener('click', () => {
+//         del.addEventListener('click', () => {
            
-        if(response.status === 200) {
-            DeleteEvent()
-            sucess.innerHTML = 'Deleted'
-            location.reload()
-        } 
-    })
-}
+//         if(response.status === 200) {
+//             DeleteEvent()
+//             sucess.innerHTML = 'Deleted'
+//             location.reload()
+//         } 
+//     })
+// }
+
+
+
 
 MyEvent()
