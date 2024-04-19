@@ -4,6 +4,7 @@ async function CreateEvent() {
     let description = document.querySelector('.description').value
     let image = document.querySelector('.image').value
     let category = document.querySelector('.category').value
+    let nb = document.querySelector('.Nbpeople').value
     let error = document.querySelectorAll('.error')
     let sucess = document.querySelector('.succes')
     let jwt = window.localStorage.getItem('jwt')
@@ -13,7 +14,8 @@ async function CreateEvent() {
         title: title,
         description: description,
         image: image,
-        category: category
+        category: category,
+        peoplemax: nb
         } 
     let request = {
         method: "POST",
