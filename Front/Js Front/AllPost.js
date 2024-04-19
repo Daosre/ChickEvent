@@ -27,8 +27,22 @@ async function getAllEvent() {
         <p class='Description'>${Event.description}</p>
         <img src='${Event.image} class='EventImage'/>
         <p class='category'>${Event.category}</p>
-        <button class="Inscription" onclick="addpeople('${Event._id}')">Participate</button>`
+        <p class="NbPeople">${Event.people.length}</p>
+        <button class="Inscription" onclick="ajoutpeople('${Event._id}')">Participate</button>`
         emplacement.appendChild(NewEvent)
     }
+}
+async function ajoutpeople(id) {
+    let jwt = window.localStorage.getItem('jwt')
+
+    let request = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+            Authorization: `Bearer ${jwt}`,
+        },
+    }
+    await fetch(`http://localhost:3107/Event/addpeople/${id}`, request)
+    window.location.reload()
 }
 getAllEvent()

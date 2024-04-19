@@ -37,7 +37,8 @@ const CreateEvent = async (req,res) => {
             req.body.category,
             authData.id,
             new Date(),
-            'published'
+            'published',
+            req.body.peoplemax
         )
         //L'endroit ou vas être ranger dans la BDD
         let result = await client

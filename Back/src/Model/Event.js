@@ -2,7 +2,7 @@
 
 class Event {
     constructor(title, description, image, category, userId, createAt,
-    status, people) {
+    status, people, peoplemax) {
         this.title = title
         this.description = description
         this.image = image
@@ -11,6 +11,7 @@ class Event {
         this.createAt = createAt
         this.status = status
         this.people = [people]
+        this.peoplemax = peoplemax
     }
 }
 
