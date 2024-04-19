@@ -38,6 +38,7 @@ const CreateEvent = async (req,res) => {
             authData.id,
             new Date(),
             'published',
+            authData.id,
             req.body.peoplemax
         )
         //L'endroit ou vas être ranger dans la BDD
@@ -195,4 +196,35 @@ const addPeople = async (req,res) => {
         }
     )
 }
-module.exports = { CreateEvent, getAllEvent, DeleteEvent, updateEvent, MyEvent, addPeople }
+const cancelPeople = async (req,res) => {
+    //Toujours appler ce qui est en dessous pour la vérif du jwt
+    const token = await extractToken(req)
+
+    jwt.verify(
+        token,
+        process.env.MA_SECRETKEY,
+        async (err, authData) => {
+            if (err) {
+                res.status(401).json({ err: 'Unauthorized' })
+                return
+            } else {
+                //Récupration de l'article
+                const id = new ObjectId(req.params.id)
+                try {
+                    let result = await client
+                    .db('ChickEvent')
+                    .collection('EventChicken')
+                    .updateOne({ _id: id },
+                    {
+                        //Permet de décider si ca existe pas ca crée ou sinon ca fait rien
+                        $pull: { people:authData.id }
+                    })        
+                    res.status(200).json(apiResponse)
+                } catch(e) {
+                    res.status(500).json(e)
+                }
+            }
+        }
+    )
+}
+module.exports = { CreateEvent, getAllEvent, DeleteEvent, updateEvent, MyEvent, addPeople, cancelPeople }

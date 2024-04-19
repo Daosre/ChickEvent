@@ -1,6 +1,6 @@
 const express = require('express')
 const { extractToken } = require('../../Utils/extractToken')
-const { CreateEvent, DeleteEvent, getAllEvent, updateEvent, MyEvent, addPeople } = require('../EventController')
+const { CreateEvent, DeleteEvent, getAllEvent, updateEvent, MyEvent, addPeople, cancelPeople } = require('../EventController')
 const { verify } = require('jsonwebtoken')
 const { middleId, middleURL } = require('../../../middlewares/middlewars')
 const router = express.Router()
@@ -18,5 +18,7 @@ router.route('/AllEvent').get(getAllEvent)
 router.route('/UpdateEvent', middleId).patch(updateEvent)
 //Rajout de participant
 router.route('/addpeople/:id').put(addPeople)
+//Cancel People
+router.route('/cancelPeople/:id').patch(cancelPeople)
 
 module.exports = router

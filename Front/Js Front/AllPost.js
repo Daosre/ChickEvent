@@ -27,8 +27,9 @@ async function getAllEvent() {
         <p class='Description'>${Event.description}</p>
         <img src='${Event.image} class='EventImage'/>
         <p class='category'>${Event.category}</p>
-        <p class="NbPeople">${Event.people.length}</p>
-        <button class="Inscription" onclick="ajoutpeople('${Event._id}')">Participate</button>`
+        <p class="NbPeople">${Event.people.length} / ${Event.peoplemax}</p>
+        <button class="Inscription" onclick="ajoutpeople('${Event._id}')">Participate</button>
+        <button class="Cancel" onclick="cancelPeople('${Event._id}')">Cancel</button>`
         emplacement.appendChild(NewEvent)
     }
 }
@@ -43,6 +44,19 @@ async function ajoutpeople(id) {
         },
     }
     await fetch(`http://localhost:3107/Event/addpeople/${id}`, request)
+    window.location.reload()
+}
+async function cancelPeople(id) {
+    let jwt = window.localStorage.getItem('jwt')
+
+    let request = {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+            Authorization: `Bearer ${jwt}`,
+        },
+    }
+    await fetch(`http://localhost:3107/Event/cancelPeople/${id}`, request)
     window.location.reload()
 }
 getAllEvent()
