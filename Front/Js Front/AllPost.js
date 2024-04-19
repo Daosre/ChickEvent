@@ -27,7 +27,7 @@ async function getAllEvent() {
         <p class='Description'>${Event.description}</p>
         <img src='${Event.image} class='EventImage'/>
         <p class='category'>${Event.category}</p>
-        <button class="Inscription">Participate</button>`
+        <button class="Inscription" onclick="addpeople('${Event._id}')">Participate</button>`
         emplacement.appendChild(NewEvent)
     }
 }

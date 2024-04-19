@@ -163,4 +163,35 @@ const MyEvent = async (req, res) => {
     )
 }
 
-module.exports = { CreateEvent, getAllEvent, DeleteEvent, updateEvent, MyEvent }
+const addPeople = async (req,res) => {
+    //Toujours appler ce qui est en dessous pour la vérif du jwt
+    const token = await extractToken(req)
+
+    jwt.verify(
+        token,
+        process.env.MA_SECRETKEY,
+        async (err, authData) => {
+            if (err) {
+                res.status(401).json({ err: 'Unauthorized' })
+                return
+            } else {
+                //Récupration de l'article
+                const id = new ObjectId(req.params.id)
+                try {
+                    let result = await client
+                    .db('ChickEvent')
+                    .collection('EventChicken')
+                    .updateOne({ _id: id },
+                    {
+                        //Permet de décider si ca existe pas ca crée ou sinon ca fait rien
+                        $addToSet: { people:authData.id }
+                    })        
+                    res.status(200).json(apiResponse)
+                } catch(e) {
+                    res.status(500).json(e)
+                }
+            }
+        }
+    )
+}
+module.exports = { CreateEvent, getAllEvent, DeleteEvent, updateEvent, MyEvent, addPeople }
