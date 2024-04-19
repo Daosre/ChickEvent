@@ -30,7 +30,7 @@ async function handleLogin() {
     handleLogin()
     submit.innerHTML += `<span class="SuccesFull">
     Connexion Réussi <span>`
-    // setTimeout(() => {
-    //     window.location.href = '../AllPost/AllEvent.html'
-    // }, 2000);
+    setTimeout(() => {
+        window.location.href = '../AllPost/AllEvent.html'
+    }, 2000);
 })
