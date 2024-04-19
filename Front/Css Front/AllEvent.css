@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+*
+ {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    width: 100%;
+    height: 100vh;
+}
+.header-container {
+    display: flex;
+    justify-content: space-between;
+}
+.Logo {
+    width: 10%;
+    border-radius: 50%;
+    border: 1px solid black;
+}
+ol {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+}
+.button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    filter: drop-shadow(0 1px 10px rgba(128, 128, 128, 0.555));
+}
+.LogOut,
+.AddEvent,
+.mine {
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.main-container {
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+.Event {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    box-shadow: 0 1px 10px rgba(255, 166, 0, 0.5);
+    width: 20%;
+    margin: 30px;
+}
+.Inscription,
+.Cancel {
+    width: 20%;
+    margin: 10px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 1px 10px rgba(128, 128, 128, 0.596);
+    cursor: pointer;
+}
+h2 {
+    font-family: "Oswald", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+}
+.Description {
+    color: grey;
+    margin: 10px;
+}
+.EventImage {
+    width:100%;
+}
+.footer-container{
+    width: 100%;
+    box-shadow: 0 1px 20px rgba(0, 0, 0, 0.486);
+}
+ footer ul {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    padding: 2%;
+ }
+ footer li {
+    cursor: pointer;
+ }
+ footer li:hover {
+    text-decoration: underline;
+ }
+ .troll {
+    color: black;
+ }
