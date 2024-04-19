@@ -28,8 +28,9 @@ async function handleLogin() {
 
   submit.addEventListener('click', () => {
     handleLogin()
-    submit.innerHTML += `<span class="SuccesFull">Connexion Réussi<span>`
-    setTimeout(() => {
-        window.location.href = '../AllPost/AllEvent.html'
-    }, 2000);
+    submit.innerHTML += `<span class="SuccesFull">
+    Connexion Réussi <span>`
+    // setTimeout(() => {
+    //     window.location.href = '../AllPost/AllEvent.html'
+    // }, 2000);
 })
